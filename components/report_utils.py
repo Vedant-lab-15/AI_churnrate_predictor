@@ -132,7 +132,7 @@ def generate_html_report(report_items, df, file_name):
                 html += f"<p>{item['content']}</p>\n"
         
         elif item["type"] == "dataset_summary":
-            summary = item["summary"]
+            summary = item["content"]
             
             html += f"""<h2>Dataset Summary</h2>
             <div>
@@ -175,7 +175,7 @@ def generate_html_report(report_items, df, file_name):
                 html += "</table>\n"
         
         elif item["type"] == "data_preview":
-            preview_df = df.head(item["rows"])
+            preview_df = df.head(item.get("rows", 10))
             
             html += f"<h2>Data Preview</h2>\n"
             html += "<table>\n"

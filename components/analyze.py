@@ -23,8 +23,7 @@ def render_analyze_page():
     if 'current_data' not in st.session_state or st.session_state.current_data is None:
         st.warning("Please upload a dataset first!")
         if st.button("Go to Upload Page"):
-            st.session_state.page = "upload"
-            st.experimental_rerun()
+            st.rerun()
         return
     
     # Get the data
@@ -103,7 +102,7 @@ def render_analyze_page():
         if st.session_state.analysis_history and st.button("Clear History"):
             st.session_state.analysis_history = []
             st.success("Analysis history cleared!")
-            st.experimental_rerun()
+            st.rerun()
     
     with col2:
         st.subheader(f"{analysis_types[selected_analysis]}")
@@ -331,7 +330,7 @@ def render_time_series_analysis(df):
                     st.error(f"Could not convert '{col}' to datetime: {str(e)}")
             
             st.session_state.current_data = df_copy
-            st.experimental_rerun()
+            st.rerun()
             
         return
     

@@ -1,10 +1,9 @@
+import io
 import streamlit as st
 import pandas as pd
 import numpy as np
-from utils.data_processing import get_column_statistics, detect_outliers
+from utils.data_processing import get_column_statistics, detect_outliers, preprocess_dataframe_for_arrow
 from utils.visualization import plot_histogram, plot_box, plot_bar, plot_outliers, plot_missing_values
-
-from utils.data_processing import preprocess_dataframe_for_arrow
 
 def render_explore_page():
     """Render the data exploration page."""
@@ -15,7 +14,7 @@ def render_explore_page():
         st.warning("Please upload a dataset first!")
         if st.button("Go to Upload Page"):
             st.session_state.page = "upload"
-            st.experimental_rerun()
+            st.rerun()
         return
     
     # Get the data
@@ -445,7 +444,7 @@ def render_missing_values_tab(df):
                         st.error("Please enter a valid value")
                 
                 st.success(f"Successfully applied {handling_method} to column '{missing_col}'")
-                st.experimental_rerun()
+                st.rerun()
     else:
         st.success("No missing values found in the dataset.")
 
